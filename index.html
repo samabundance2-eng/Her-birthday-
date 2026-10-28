@@ -108,6 +108,19 @@ button:active{transform:scale(.96)}
 .wishc .ic{width:22px;height:22px}
 .wishc:nth-child(1) .ic{color:var(--rose)}.wishc:nth-child(2) .ic{color:var(--aqua)}.wishc:nth-child(3) .ic{color:var(--sun)}
 .wishc p{margin:8px 0 0;line-height:1.65}
+.dz{position:relative;height:190px;margin-top:2px}
+#cel{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);transition:left .35s cubic-bezier(.3,1.4,.5,1),top .35s cubic-bezier(.3,1.4,.5,1);white-space:nowrap}
+#dmsg{margin:4px 0 0;min-height:1.5em;font-family:Georgia,serif;color:var(--muted);font-size:.95rem}
+.nav.lock a:not([data-go="home"]){opacity:.38}
+.nav.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(calc(-50% - 7px))}40%,80%{transform:translateX(calc(-50% + 7px))}}
+.cake svg{width:230px;height:auto;overflow:visible}
+.fw{transform-box:fill-box;transform-origin:50% 100%;transform:rotate(calc(var(--b,0)*18deg)) scaleY(calc(1 - var(--b,0)*.45));transition:transform .08s linear}
+.out .fw,.out .glow{display:none}
+.sm{fill:none;stroke:rgba(255,255,255,.6);stroke-width:3;stroke-linecap:round;opacity:0;transform-box:fill-box}
+.out .sm{animation:smoke 2.4s ease-out forwards}
+@keyframes smoke{0%{opacity:.85;transform:translateY(0)}100%{opacity:0;transform:translateY(-36px)}}
+.micb{margin-top:12px;padding:10px 20px;font-size:.9rem}
 </style>
 </head>
 <body>
@@ -124,7 +137,7 @@ button:active{transform:scale(.96)}
 <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14c1 1.8 2.5 2.5 4 2.5s3-.7 4-2.5M9 9.5h.01M15 9.5h.01"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
 <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
-<symbol id="i-msg" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+<symbol id="i-msg" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 3a3 3 0 00-3 3v6a3 3 0 006 0V6a3 3 0 00-3-3z"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></symbol>
 </svg>
 
 <div class="bg"></div><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
@@ -144,7 +157,7 @@ button:active{transform:scale(.96)}
       <small id="hsm" style="display:none">Today is all about you</small>
       <h1 id="hh1" style="display:none">Happy Birthday,<br><span class="grad">Precious</span>!</h1>
       <p id="line">Calm like water, warm like sunshine</p>
-      <button data-go="wish">Let’s celebrate <i data-i="arrow"></i></button>
+      <div class="dz" id="dz"><button id="cel">Let’s celebrate <i data-i="arrow"></i></button></div><p id="dmsg">Press the button to start the party</p>
     </div>
   </div>
 </section>
@@ -153,15 +166,38 @@ button:active{transform:scale(.96)}
     <h2><i data-i="cake"></i>Make a wish</h2>
     <p class="sub">Tap the cake to blow out the candles.</p>
     <div class="glass cake" id="cake">
-      <svg viewBox="0 0 170 150" aria-label="Birthday cake">
-        <ellipse cx="85" cy="138" rx="78" ry="8" fill="rgba(255,255,255,.25)"/>
-        <rect x="20" y="92" width="130" height="44" rx="12" fill="#ff8fb1"/>
-        <rect x="38" y="58" width="94" height="38" rx="10" fill="#5ee0d0"/>
-        <path d="M20 104q16 14 32 0t32 0 32 0 34 0" stroke="#fff" stroke-width="5" fill="none" opacity=".8"/>
-        <g fill="#ffd38a"><rect x="60" y="34" width="6" height="26" rx="3"/><rect x="82" y="34" width="6" height="26" rx="3"/><rect x="104" y="34" width="6" height="26" rx="3"/></g>
-        <g fill="#ffb347"><ellipse class="fl" cx="63" cy="26" rx="5" ry="9"/><ellipse class="fl" cx="85" cy="26" rx="5" ry="9"/><ellipse class="fl" cx="107" cy="26" rx="5" ry="9"/></g>
+      <svg viewBox="0 -24 240 254" aria-label="Birthday cake" style="overflow:visible">
+        <defs>
+          <linearGradient id="gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9ab8"/><stop offset="1" stop-color="#f0587f"/></linearGradient>
+          <linearGradient id="gM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8af3e5"/><stop offset="1" stop-color="#38bfae"/></linearGradient>
+          <linearGradient id="gT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe3a8"/><stop offset="1" stop-color="#ffbb5c"/></linearGradient>
+          <linearGradient id="flg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff8a1f"/><stop offset=".6" stop-color="#ffd24d"/><stop offset="1" stop-color="#fff6c8"/></linearGradient>
+          <radialGradient id="gl"><stop offset="0" stop-color="#ffd24d" stop-opacity=".55"/><stop offset="1" stop-color="#ffd24d" stop-opacity="0"/></radialGradient>
+          <pattern id="st" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4" height="8" fill="#fff"/><rect x="4" width="4" height="8" fill="#ff8fb1"/></pattern>
+        </defs>
+        <ellipse cx="120" cy="214" rx="108" ry="12" fill="rgba(255,255,255,.16)"/>
+        <ellipse cx="120" cy="209" rx="96" ry="9" fill="rgba(255,255,255,.3)"/>
+        <rect x="28" y="142" width="184" height="62" rx="18" fill="url(#gB)"/>
+        <path d="M28 150Q28 142 36 142H204Q212 142 212 150V158 q-11.5 18 -23 0 q-11.5 18 -23 0 q-11.5 18 -23 0 q-11.5 18 -23 0 q-11.5 18 -23 0 q-11.5 18 -23 0 q-11.5 18 -23 0 q-11.5 18 -23 0  Z" fill="#fff" opacity=".95"/>
+        <rect x="40" y="166" width="9" height="34" rx="4.5" fill="#fff" opacity=".18"/>
+        <g>
+          <rect x="50" y="176" width="8" height="3" rx="1.5" fill="#ffd38a" transform="rotate(20 54 177)"/>
+          <rect x="76" y="188" width="8" height="3" rx="1.5" fill="#5ee0d0" transform="rotate(-30 80 189)"/>
+          <rect x="100" y="177" width="8" height="3" rx="1.5" fill="#fff" transform="rotate(50 104 178)"/>
+          <rect x="128" y="190" width="8" height="3" rx="1.5" fill="#ffd38a" transform="rotate(10 132 191)"/>
+          <rect x="154" y="178" width="8" height="3" rx="1.5" fill="#5ee0d0" transform="rotate(-20 158 179)"/>
+          <rect x="178" y="190" width="8" height="3" rx="1.5" fill="#fff" transform="rotate(40 182 191)"/>
+          <rect x="194" y="176" width="8" height="3" rx="1.5" fill="#ffd38a" transform="rotate(-50 198 177)"/>
+        </g>
+        <rect x="54" y="98" width="132" height="50" rx="16" fill="url(#gM)"/>
+        <path d="M54 106Q54 98 62 98H178Q186 98 186 106V114 q-11.0 16 -22 0 q-11.0 16 -22 0 q-11.0 16 -22 0 q-11.0 16 -22 0 q-11.0 16 -22 0 q-11.0 16 -22 0  Z" fill="#fff" opacity=".95"/>
+        <path d="M120 137C108 129 108 119 114 119C117 119 119 121 120 123C121 121 123 119 126 119C132 119 132 129 120 137Z" fill="#fff" opacity=".85"/>
+        <rect x="82" y="58" width="76" height="44" rx="14" fill="url(#gT)"/>
+        <path d="M82 66Q82 58 90 58H150Q158 58 158 66V72 q-9.5 14 -19 0 q-9.5 14 -19 0 q-9.5 14 -19 0 q-9.5 14 -19 0  Z" fill="#fff" opacity=".95"/>
+        <rect x="96" y="26" width="8" height="32" rx="2" fill="url(#st)" stroke="rgba(0,0,0,.12)"/><path d="M100 26v-5" stroke="#5b4636" stroke-width="1.6" stroke-linecap="round"/><circle class="glow" cx="100" cy="12" r="15" fill="url(#gl)"/><g class="fw"><path class="fl" d="M100 1C107 9 106 19 100 21C94 19 93 9 100 1Z" fill="url(#flg)"/></g><path class="sm" d="M100 18q5-7 0-14t0-14"/><rect x="116" y="26" width="8" height="32" rx="2" fill="url(#st)" stroke="rgba(0,0,0,.12)"/><path d="M120 26v-5" stroke="#5b4636" stroke-width="1.6" stroke-linecap="round"/><circle class="glow" cx="120" cy="12" r="15" fill="url(#gl)"/><g class="fw"><path class="fl" d="M120 1C127 9 126 19 120 21C114 19 113 9 120 1Z" fill="url(#flg)"/></g><path class="sm" d="M120 18q5-7 0-14t0-14"/><rect x="136" y="26" width="8" height="32" rx="2" fill="url(#st)" stroke="rgba(0,0,0,.12)"/><path d="M140 26v-5" stroke="#5b4636" stroke-width="1.6" stroke-linecap="round"/><circle class="glow" cx="140" cy="12" r="15" fill="url(#gl)"/><g class="fw"><path class="fl" d="M140 1C147 9 146 19 140 21C134 19 133 9 140 1Z" fill="url(#flg)"/></g><path class="sm" d="M140 18q5-7 0-14t0-14"/>
       </svg>
-      <p id="wishtxt">Close your eyes, then tap</p>
+      <p id="wishtxt">Make a wish, then blow out the candles</p>
+      <button class="micb" id="mic"><i data-i="mic"></i> Blow with your mic</button>
     </div>
     <h2><i data-i="sparkles"></i>Compliment machine</h2>
     <div class="glass machine">
@@ -222,7 +258,7 @@ button:active{transform:scale(.96)}
   </section>
 </main>
 
-<nav class="glass nav" id="nav">
+<nav class="glass nav lock" id="nav">
   <a data-go="home" class="on"><i data-i="home"></i>Home</a>
   <a data-go="wish"><i data-i="cake"></i>Wish</a>
   <a data-go="about"><i data-i="heart"></i>About</a>
@@ -248,21 +284,45 @@ button:active{transform:scale(.96)}
     }
   }
   /* pages */
-  var cur="home",tab="catch",G={on:false};
+  var cur="home",tab="catch",G={on:false},locked=true;
   function go(id){
-    cur=id;if(id!=="play")G.on=false;
+    if(locked&&id!=="home"){var nv=$("nav");nv.classList.remove("shake");void nv.offsetWidth;nv.classList.add("shake");var dd0=$("dmsg");if(dd0)dd0.textContent="Nice try! Catch the button first.";return}cur=id;if(id!=="play")G.on=false;
     [].forEach.call(document.querySelectorAll(".view"),function(v){v.classList.toggle("on",v.id===(id==="home"?"home":id+"-v"))});
     [].forEach.call(document.querySelectorAll("#nav a"),function(a){a.classList.toggle("on",a.getAttribute("data-go")===id)});
     window.scrollTo(0,0);
   }
   [].forEach.call(document.querySelectorAll("[data-go]"),function(el){el.addEventListener("click",function(){go(el.getAttribute("data-go"))})});
-  var h=(location.hash||"").slice(1);if(["wish","about","mem","play","gift"].indexOf(h)>-1)go(h);
+  
   for(var i=0;i<12;i++){var b=document.createElement("span"),z=8+Math.random()*24;b.className="bub";
     b.style.cssText="width:"+z+"px;height:"+z+"px;left:"+(Math.random()*96)+"vw;animation-duration:"+(11+Math.random()*12)+"s;animation-delay:"+(-Math.random()*14)+"s";document.body.appendChild(b)}
   var L=["Calm like water, warm like sunshine","You’re one of the good ones","Another year of being awesome","The world is brighter with you"],li=0;
   setInterval(function(){var p=$("line");p.style.opacity=0;setTimeout(function(){li=(li+1)%L.length;p.textContent=L[li];p.style.opacity=1},400)},3500);
-  var lit=true;$("cake").onclick=function(e){lit=!lit;this.classList.toggle("out",!lit);
-    $("wishtxt").textContent=lit?"Relit! Make another wish.":"Wish made. It’s coming true.";if(!lit)burst(e.clientX,e.clientY,26)};
+  var lit=true,cakeEl=$("cake"),wt=$("wishtxt"),ms=null;
+  function stopMic(){if(ms){ms.on=false;ms.t.getTracks().forEach(function(k){k.stop()});try{ms.c.close()}catch(_){}ms=null}$("mic").innerHTML=ICON("mic")+" Blow with your mic";cakeEl.style.setProperty("--b",0)}
+  function blow(x,y){if(!lit)return;lit=false;cakeEl.classList.add("out");wt.textContent="Wish made. It’s coming true.";burst(x,y,30);stopMic()}
+  function relight(){lit=true;cakeEl.classList.remove("out");wt.textContent="Relit! Make another wish."}
+  cakeEl.onclick=function(e){if(lit)blow(e.clientX,e.clientY);else relight()};
+  $("mic").onclick=function(e){
+    e.stopPropagation();
+    if(ms){stopMic();wt.textContent="Make a wish, then blow out the candles";return}
+    if(!lit)relight();
+    if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){wt.textContent="Mic isn’t available here. Just tap the cake.";return}
+    navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}}).then(function(st){
+      var AC=window.AudioContext||window.webkitAudioContext,c=new AC(),an=c.createAnalyser();an.fftSize=1024;an.smoothingTimeConstant=.5;
+      c.createMediaStreamSource(st).connect(an);
+      ms={t:st,c:c,on:true};var d=new Uint8Array(an.frequencyBinCount),acc=0;
+      $("mic").innerHTML=ICON("mic")+" Listening... tap to stop";wt.textContent="Take a deep breath and blow on your phone";
+      (function loop(){
+        if(!ms||!ms.on)return;
+        if(cur!=="wish"){stopMic();return}
+        an.getByteFrequencyData(d);
+        var s=0;for(var i=1;i<12;i++)s+=d[i];var lv=s/11;
+        cakeEl.style.setProperty("--b",Math.max(0,Math.min(1,(lv-35)/80)).toFixed(2));
+        acc=lv>70?acc+1:Math.max(0,acc-2);
+        if(acc>18){var q=cakeEl.getBoundingClientRect();blow(q.left+q.width/2,q.top+q.height/3);return}
+        requestAnimationFrame(loop)})();
+    }).catch(function(){wt.textContent="Mic blocked. Just tap the cake to blow the candles out."});
+  };
   [].forEach.call(document.querySelectorAll(".flip"),function(f){f.onclick=function(){f.classList.toggle("on")}});
   var C=["You have the best energy.","Your smile fixes bad days.","You’re easy to love.","You make people feel safe.","Your laugh is contagious.","You’re quietly amazing.","Everyone is lucky to know you."],ci=-1;
   $("cbtn").onclick=function(e){var n;do{n=Math.floor(Math.random()*C.length)}while(n===ci);ci=n;$("comp").textContent=C[n];burst(e.clientX,e.clientY,10)};
@@ -306,16 +366,29 @@ button:active{transform:scale(.96)}
 
   /* Catch the Gift */
   var run=$("run"),rb=$("rb"),caught=0,dodge=0,done=false,TA=["Too slow!","Almost!","Nope, not today","Ha, missed!","So close!"];
-  function hop(){if(!run.clientWidth)return;rb.style.left=(6+Math.random()*(run.clientWidth-rb.offsetWidth-12))+"px";rb.style.top=(6+Math.random()*(run.clientHeight-rb.offsetHeight-52))+"px"}
-  setInterval(function(){if(cur==="play"&&tab==="bub"&&!done)hop()},1400);
+  function hopG(){if(!run.clientWidth)return;rb.style.left=(6+Math.random()*(run.clientWidth-rb.offsetWidth-12))+"px";rb.style.top=(6+Math.random()*(run.clientHeight-rb.offsetHeight-52))+"px"}
+  setInterval(function(){if(cur==="play"&&tab==="bub"&&!done)hopG()},1800);
   run.addEventListener("pointerdown",function(e){
     if(done)return;var b=rb.getBoundingClientRect();
-    if(!(e.clientX>b.left-22&&e.clientX<b.right+22&&e.clientY>b.top-22&&e.clientY<b.bottom+22))return;
-    if(Math.random()<.3+dodge*.25){caught++;dodge=0;burst(e.clientX,e.clientY,12);
-      if(caught>=5){done=true;$("rs").textContent="You caught it! Your surprise is ready.";rb.innerHTML=ICON("mail")+" Open it";rb.style.pointerEvents="auto";rb.onclick=function(){go("gift")};burst(e.clientX,e.clientY,36);return}
-      $("rs").textContent="Caught: "+caught+" / 5"}
-    else{dodge++;$("rs").textContent=TA[Math.floor(Math.random()*TA.length)]}
-    hop()});
+    var hit=e.clientX>b.left-14&&e.clientX<b.right+14&&e.clientY>b.top-14&&e.clientY<b.bottom+14;
+    if(!hit){$("rs").textContent=TA[Math.floor(Math.random()*TA.length)];return}
+    caught++;burst(e.clientX,e.clientY,12);
+    if(caught>=5){done=true;$("rs").textContent="You caught it! Your surprise is ready.";rb.innerHTML=ICON("mail")+" Open it";rb.style.pointerEvents="auto";rb.onclick=function(){go("gift")};burst(e.clientX,e.clientY,36);return}
+    $("rs").textContent="Caught: "+caught+" / 5";hopG()});
+  /* dodging celebrate button */
+  var cel=$("cel"),dz=$("dz"),dm=$("dmsg"),dn=0,FUN=["Whoops, too slow!","Catch me if you can!","Nope. Try again!","I’m shy today.","Ha! Missed me.","Are you even trying?","Almost! (Not really.)","My legs beat your thumb.","Birthday girl energy needed!","Too fast for you?","Is that all you’ve got?"];
+  function hopH(ax,ay){
+    var W=dz.clientWidth,H=dz.clientHeight;if(W<=0)return;
+    var hw=cel.offsetWidth/2+4,hh=cel.offsetHeight/2+4,x,y,k=0;
+    do{x=hw+Math.random()*Math.max(1,W-2*hw);y=hh+Math.random()*Math.max(1,H-2*hh);k++}while(k<8&&ax!=null&&Math.hypot(x-ax,y-ay)<90);
+    cel.style.left=x+"px";cel.style.top=y+"px"}
+  
+  cel.addEventListener("click",function(e){
+    if(!locked){go("wish");return}
+    if(dn>=5||Math.random()<.12+dn*.18){
+      locked=false;$("nav").classList.remove("lock");dm.textContent="Okay okay, you got me! The party is unlocked.";burst(e.clientX,e.clientY,44);
+      setTimeout(function(){go("wish")},1400)}
+    else{dn++;dm.textContent=FUN[Math.floor(Math.random()*FUN.length)];var r=dz.getBoundingClientRect();hopH(e.clientX-r.left,e.clientY-r.top)}});
   /* hero tilt */
   var hh=$("hero2"),ah=$("archw");
   hh.addEventListener("pointermove",function(e){var r=hh.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;ah.style.transform="perspective(800px) rotateY("+(x*14)+"deg) rotateX("+(-y*10)+"deg)"});
